@@ -18,5 +18,9 @@ app.get('/posts', reqHandler.getAllPosts);
 
 app.post('/post', reqHandler.makePost);
 
+app.get('/cena', reqHandler.cena);
+app.post('/cena', reqHandler.cena);
+
+
 
 module.exports = app;

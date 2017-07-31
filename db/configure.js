@@ -1,7 +1,21 @@
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/data/db', { server: {reconnectTries: Number.MAX_VALUE} });
+var autoIncrement = require('mongoose-auto-increment');
+// mongoose.connect('mongodb://localhost/data/db', { 
+// 	server: {reconnectTries: Number.MAX_VALUE} 
+// });
+// mongoose.Promise = require('bluebird');
 
-var db = mongoose.connection;
+var promise = mongoose.createConnection('mongodb://localhost/myapp', {
+  useMongoClient: true,
+});
+
+promise.then(function(db) {
+	connection.openUri('mongodb://localhost/myapp', { server: {reconnectTries: Number.MAX_VALUE} });
+});
+
+var db = promise;
+
+autoIncrement.initialize(db);
 
 db.on('error', console.error.bind(console, 'connection error:'));
 

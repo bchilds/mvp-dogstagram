@@ -29,6 +29,7 @@
     "jsx": "^0.9.89",
     "mongodb": "^2.2.30",
     "mongoose": "^4.11.5",
+    "mongoose-auto-increment": "^5.0.1",
     "nodemon": "^1.11.0",
     "react": "^15.6.1",
     "react-dropzone": "^3.13.4"
