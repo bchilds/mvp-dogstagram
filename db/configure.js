@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/data/dogstagram', { server: {reconnectTries: Number.MAX_VALUE} });
+mongoose.connect('mongodb://localhost/data/db', { server: {reconnectTries: Number.MAX_VALUE} });
 
 var db = mongoose.connection;
 
