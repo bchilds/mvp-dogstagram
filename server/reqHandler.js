@@ -7,5 +7,22 @@ var Post = require('../db/post.js');
 
 // Get Index
 exports.getIndex = (req, res) => {
-	res.sendFile('index.html');
+	//needs improvement
+	res.sendFile('/Users/BChilds/Desktop/HR Git/MVP-Dogstagram/index.html')
+};
+
+exports.signUp = (req, res) => {
+
+};
+
+exports.login = (req, res) => {
+
+};
+
+exports.getPost = (req, res) => {
+
+};
+
+exports.makePost = (req, res) => {
+
 };
