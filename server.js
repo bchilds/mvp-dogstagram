@@ -14,6 +14,7 @@ app.post('/signup', reqHandler.signUp);
 app.post('/login', reqHandler.login);
 
 app.get('/post/:id', reqHandler.getPost);
+app.get('/posts', reqHandler.getAllPosts);
 
 app.post('/post', reqHandler.makePost);
 
