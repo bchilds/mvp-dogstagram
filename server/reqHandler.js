@@ -8,7 +8,7 @@ var Post = require('../db/post.js');
 // Get Index
 exports.getIndex = (req, res) => {
 	//needs improvement
-	res.sendFile('/Users/BChilds/Desktop/HR Git/MVP-Dogstagram/index.html')
+	res.sendFile('index.html')
 };
 
 exports.signUp = (req, res) => {
@@ -16,12 +16,9 @@ exports.signUp = (req, res) => {
 	//var password = req.body.password;
 	var password = 123;
 	var username = 'bchilds3';
-
 	User.findOne({username: username})
 	.then( (user) => {
 		if (!user){
-			console.log('user >>>>>>>>>>>>>>>>>>', user);
-			// console.log('no user found');
 			//hash password using bcrypt
 			//then save new user to DB
 			bcrypt.hash('sushi', null, null, function(err, hash) {
@@ -84,6 +81,7 @@ exports.makePost = (req, res) => {
 exports.getAllPosts = (req, res) => {
 	Post.find({})
 	.then((posts) => {
+		console.log(posts + ' NOT NULL');
 		res.status(200).send(posts);
 	});
 };
