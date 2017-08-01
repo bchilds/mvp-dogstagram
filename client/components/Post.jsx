@@ -33,9 +33,9 @@ class Post extends React.Component {
 				ctx3.putImageData(invert, 0, 0);
 			}	
 
-			this.setState({
-				update: this.state.update++,
-			});
+			// this.setState({
+			// 	update: this.state.update++,
+			// });
 		}
 	}
 

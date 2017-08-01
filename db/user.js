@@ -10,10 +10,11 @@ var userSchema = mongoose.Schema({
 
 var User = mongoose.model('User', userSchema);
 
-User.prototype.comparePassword = (enteredPassword, callback) => {
-	bcrypt.compare(enteredPassword, this.password, (err, res) => {
+User.prototype.comparePassword = function (enteredPassword, callback) {
+	var username = this.username
+	bcrypt.compare(enteredPassword, this.password, (err, isMatch) => {
 		if (err) return null;
-		callback(res);
+		callback(null, isMatch);
 	});
 },
 

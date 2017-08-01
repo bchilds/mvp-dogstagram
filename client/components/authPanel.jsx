@@ -1,5 +1,6 @@
 import React from 'react';
 import $ from 'jquery';
+import * as User from '../models/user.js'
 
 class AuthPanel extends React.Component {
 
@@ -11,14 +12,15 @@ class AuthPanel extends React.Component {
 
 	handleSubmit(event) {
 		event.preventDefault();
-		console.log('Signed in!');
-		this.props.handleSignedIn();
+		// console.log('Signing in!');
+		User.signIn({username: this.refs.username.value, password:this.refs.password.value}, this.props.handleSignedIn);
 	}
 
 	handleSignup(event) {
 		event.preventDefault();
-		console.log('Signed up');
-		this.props.handleSignedIn();
+		//console.log('Signed up');
+		User.signUp({username: this.refs.username.value, password:this.refs.password.value}, this.props.handleSignedIn);
+		// this.props.handleSignedIn();
 	}
 
 	render() {

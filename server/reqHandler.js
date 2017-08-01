@@ -12,16 +12,16 @@ exports.getIndex = (req, res) => {
 };
 
 exports.signUp = (req, res) => {
-	//var username = req.body.username;
-	//var password = req.body.password;
-	var password = 123;
-	var username = 'bchilds3';
+	var username = req.body.username;
+	var password = req.body.password;
+	//var password = 123;
+	//var username = 'bchilds3';
 	User.findOne({username: username})
 	.then( (user) => {
 		if (!user){
 			//hash password using bcrypt
 			//then save new user to DB
-			bcrypt.hash('sushi', null, null, function(err, hash) {
+			bcrypt.hash(password, null, null, function(err, hash) {
 				var newUser = new User({
 					username: username,
 					password: hash,
@@ -34,29 +34,27 @@ exports.signUp = (req, res) => {
 			});
 		} else {
 			console.log('User exists');
-			res.redirect('https://media.giphy.com/media/xTiTnoHt2NwerFMsCI/giphy.gif');
+			res.sendStatus(409);
 		}
 	})
 };
 
 exports.login = (req, res) => {
-	//var username = req.body.username;
-	//var password = req.body.password;
-	console.log('>>>>>>>>>>> ',req.body);
-	var username = 'bchilds';
-	var password = '123';
-	User.findOne({username: username})
-	.then( (user) => {
-		user.comparePassword(password, (res) => {
-			if(!res) {
-				res.redirect('https://media.giphy.com/media/xTiTnoHt2NwerFMsCI/giphy.gif');
-			}
-
-			//if Success, send user and 200
-			res.status(200).send(user);
-		});
+	var username = req.body.username;
+	var password = req.body.password;
+	User.findOne({ username: username }).exec(function(err, user) {
+	  if (!user) {
+	    res.sendStatus(404);
+	  } else {
+	    user.comparePassword(password, function(err, match) {
+	      if (match) {
+	        res.status(200).send(user);
+	      } else {
+	        res.sendStatus(403);
+	      }
+	    });
+	  }
 	});
-
 
 };
 
@@ -65,16 +63,15 @@ exports.getPost = (req, res) => {
 };
 
 exports.makePost = (req, res) => {
-	console.log('REQ.BODY >>>>', req.body);
 	var newPost = new Post({
-		//temp static data
 		username: req.body.username,
 		imagePath: req.body.imagePath,
 	});
 	newPost.save((err, post) => {
 		if(err) {
 			console.log('error posting');
-			res.redirect('https://media.giphy.com/media/xTiTnoHt2NwerFMsCI/giphy.gif')
+			res.sendStatus(404);
+			//res.redirect('https://media.giphy.com/media/xTiTnoHt2NwerFMsCI/giphy.gif')
 		}
 		res.sendStatus(200);
 	})

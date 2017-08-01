@@ -22,10 +22,10 @@ export const makePost = (input, callback) => {
 		success: post => {
 			getAllPosts(callback);
 		},
-		error: err => {
-			console.log(err.responseText)
-			getAllPosts(callback)
-			return console.log('>>>>> THERE WAS A FUCKUP <<<<<');
+		error: (err, statusCode) => {
+			getAllPosts(callback);
+			// getAllPosts(callback)
+			return null;
 		},
 	});
 }

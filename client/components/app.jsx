@@ -15,18 +15,20 @@ class App extends React.Component {
 		this.getAllPosts = this.getAllPosts.bind(this);
 		this.handleSignedIn = this.handleSignedIn.bind(this);
 		this.makePost = this.makePost.bind(this);
-
 	}
 
 	getAllPosts(allPosts) {
+		
 		this.setState({
 			posts: allPosts,
 		});
 	}
 
-	handleSignedIn() {
+	handleSignedIn(username) {
+		console.log(username);
 		this.setState({
 			signedIn: !this.state.signedIn,
+			username: username,
 		})
 	}
 
