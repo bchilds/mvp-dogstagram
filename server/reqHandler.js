@@ -81,7 +81,6 @@ exports.makePost = (req, res) => {
 exports.getAllPosts = (req, res) => {
 	Post.find({})
 	.then((posts) => {
-		console.log(posts + ' NOT NULL');
 		res.status(200).send(posts);
 	});
 };
