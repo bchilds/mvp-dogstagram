@@ -11,13 +11,13 @@ class AuthPanel extends React.Component {
 
 	handleSubmit(event) {
 		event.preventDefault();
-		console.log('A THING!');
+		console.log('Signed in!');
 		this.props.handleSignedIn();
 	}
 
 	handleSignup(event) {
 		event.preventDefault();
-		console.log('ANOTHER THING');
+		console.log('Signed up');
 		this.props.handleSignedIn();
 	}
 

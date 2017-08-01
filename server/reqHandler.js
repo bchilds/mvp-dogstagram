@@ -42,6 +42,7 @@ exports.signUp = (req, res) => {
 exports.login = (req, res) => {
 	//var username = req.body.username;
 	//var password = req.body.password;
+	console.log('>>>>>>>>>>> ',req.body);
 	var username = 'bchilds';
 	var password = '123';
 	User.findOne({username: username})
@@ -64,10 +65,11 @@ exports.getPost = (req, res) => {
 };
 
 exports.makePost = (req, res) => {
+	console.log('REQ.BODY >>>>', req.body);
 	var newPost = new Post({
 		//temp static data
-		username: 'bchilds',
-		imagePath: 'http://i0.kym-cdn.com/entries/icons/mobile/000/013/564/doge.jpg',
+		username: req.body.username,
+		imagePath: req.body.imagePath,
 	});
 	newPost.save((err, post) => {
 		if(err) {

@@ -11,3 +11,21 @@ export const getAllPosts = (callback) => {
 		},
 	});
 };
+
+export const makePost = (input, callback) => {
+	$.ajax({
+		url: `${MAIN_URL}/post`,
+		type: 'POST',
+		dataType: 'application/json',
+		data: JSON.stringify(input),
+		contentType: 'application/json',
+		success: post => {
+			getAllPosts(callback);
+		},
+		error: err => {
+			console.log(err.responseText)
+			getAllPosts(callback)
+			return console.log('>>>>> THERE WAS A FUCKUP <<<<<');
+		},
+	});
+}

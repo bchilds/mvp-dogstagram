@@ -10,9 +10,11 @@ class App extends React.Component {
 			posts: [],
 			signedIn: false,
 			profPicUrl: 'http://i0.kym-cdn.com/entries/icons/mobile/000/013/564/doge.jpg',
+			username: 'bchilds',
 		}
 		this.getAllPosts = this.getAllPosts.bind(this);
 		this.handleSignedIn = this.handleSignedIn.bind(this);
+		this.makePost = this.makePost.bind(this);
 
 	}
 
@@ -28,16 +30,33 @@ class App extends React.Component {
 		})
 	}
 
+	makePost() {
+		PostModel.makePost({
+			username: this.state.username,
+			imagePath: this.refs.imageUrl.value,
+		}, this.getAllPosts);
+	}
+
+
 	componentDidMount() {
 		PostModel.getAllPosts(this.getAllPosts);
 	}
 
 	render() {
-		return (
+		var post = null;
+		if(this.state.signedIn) {
+			post = 
+				<div>
+					<label>Image URL: </label> <input ref="imageUrl" name="imageUrl" /> <button onClick={this.makePost}> + </button>
+				</div>	
+		}
 
+
+		return (
 			<div className="app">
 				<h1>Dogstagram</h1>
 				{!this.state.signedIn && <AuthPanel signedIn={this.state.signedIn} handleSignedIn={this.handleSignedIn} />}
+				{post}
 				<PostPanel posts={this.state.posts} signedIn={this.state.signedIn}/>
 			</div>
 
