@@ -1,12 +1,18 @@
 import React from 'react';
 import * as PostModel from '../models/post.js'
+import * as Filters from '../Utils/utils.js'
+
 class Post extends React.Component {
 	constructor(props) {
 		super(props)
 
 		this.image = new Image();
+		this.image.crossOrigin = 'anonymous';
 		this.image.src = props.post.imagePath;
-		console.log(this.image.width, this.image.height);
+
+		this.state = {
+			update: 0
+		};
 	}
 
 	componentDidMount() {
@@ -16,9 +22,19 @@ class Post extends React.Component {
 
 		ctx.drawImage(this.image,0,0,this.image.width,this.image.height);
 
-		ctx2.drawImage(this.image,0,0,this.image.width,this.image.height);
+		if(this.can1.width > 0) {
+			var thePix = Filters.getPixels(this.can1);
+			ctx3.putImageData(thePix, 0, 0);
 
-		ctx3.drawImage(this.image,0,0,this.image.width,this.image.height);
+			const grayPix = Filters.filterImage(Filters.grayscale, this.can1);
+			ctx2.putImageData(grayPix, 0, 0);
+			const invert = Filters.filterImage(Filters.invert, this.can1);
+			ctx3.putImageData(invert, 0, 0)
+		}	
+
+		this.setState({
+			update: this.state.update++,
+		});
 	}
 
 	render() {
