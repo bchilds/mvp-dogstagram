@@ -1,7 +1,7 @@
 import React from 'react';
 import AuthPanel from './authPanel.jsx';
 import PostPanel from './PostPanel.jsx';
-import * as PostModel from './models/post.js';
+import * as PostModel from '../models/post.js';
 
 class App extends React.Component {
 	constructor(props) {
@@ -18,7 +18,7 @@ class App extends React.Component {
 
 	getAllPosts(allPosts) {
 		this.setState({
-			posts = allPosts;
+			posts: allPosts,
 		});
 	}
 
@@ -29,7 +29,7 @@ class App extends React.Component {
 	}
 
 	componentDidMount() {
-
+		PostModel.getAllPosts(this.getAllPosts);
 	}
 
 	render() {

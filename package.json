@@ -28,6 +28,7 @@
     "bcrypt-nodejs": "0.0.3",
     "bluebird": "^3.5.0",
     "browserify-middleware": "^7.1.0",
+    "cors": "^2.8.4",
     "express": "^4.15.3",
     "jquery": "^3.2.1",
     "jsx": "^0.9.89",

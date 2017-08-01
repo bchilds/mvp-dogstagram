@@ -2,10 +2,10 @@ var express = require('express');
 var reqHandler = require('./server/reqHandler.js')
 var browserify = require('browserify-middleware');
 var path = require('path');
-
+var cors = require('cors');
 
 var app = express();
-
+app.use(cors());
 
 app.get('/bundle.js', browserify('./client/index.js', {
   transform: [ [ require('babelify'), { presets: ['es2015', 'react'] } ] ]
